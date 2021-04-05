@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="Scripts/jquery-1.10.2.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var ulStudent = $('#ulStudent');
+
+            $('#btn').click(function () {
+                $.ajax({
+                    type: 'GET',
+                    url: 'http://localhost:50020/api/Students',
+                    dataType: 'json',
+                    success: function (data) {
+                        ulStudent.empty();
+                        $.each(data, function (index, val) {
+                            //alert(JSON.stringify(val));
+                            //console.log(JSON.stringify(val));
+
+                            var fullName = val.firstName + ' ' + val.lastName;
+                            ulStudent.append('<li>' + fullName + '</li>')
+                        });
+                    }
+                });
+            });
+
+            $('#btnClear').click(function () {
+                ulStudent.empty();
+            });
+        });
+    </script>
+</head>
+<body>
+    <input id="btn" type="button" value="Get name of Students" />
+    <input id="btnClear" type="button" value="Clear" />
+    <ul id="ulStudent"></ul>
+</body>
+</html>
