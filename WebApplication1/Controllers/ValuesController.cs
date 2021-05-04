@@ -14,7 +14,7 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public IHttpActionResult Get()
         {
-            return 
+            return; 
         }
 
         // GET: api/values

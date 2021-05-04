@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace StudebtsDataAccess
+namespace StudentsDataAccess
 {
     using System;
     using System.Data.Entity;

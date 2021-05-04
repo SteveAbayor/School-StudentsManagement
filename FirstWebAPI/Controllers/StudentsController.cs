@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using StudebtsDataAccess;
+using StudentsDataAccess;
 using System.Threading;
 using System.Web.Mvc;
 
@@ -12,32 +12,21 @@ namespace FirstWebAPI.Controllers
 {
     public class StudentsController : ApiController
     {
-        //[BasicAuthentication]
+        [BasicAuthentication]
         public IHttpActionResult Get(string schoolClass, string gender = "All")
         {
-            string grade = Thread.CurrentPrincipal.Identity.Name;
+            string username = Thread.CurrentPrincipal.Identity.Name;
 
             using (StudentsDBEntities entities = new StudentsDBEntities())
             {
-             
-                 if (!(gender.ToLower() == "all" || gender.ToLower() == "male" || gender.ToLower() == "female"))
+
+                if (!(gender.ToLower() == "all" || gender.ToLower() == "male" || gender.ToLower() == "female"))
                     return BadRequest();
 
                 switch (schoolClass.ToLower())
                 {
                     case "all":
                         return Ok(entities.Students.ToList());
-                    case "pry1":
-                        var test = entities.Students.Where(e => e.Class.ToLower() == schoolClass.ToLower() && e.Gender.ToLower() == gender.ToLower()).ToList();
-                        return Ok(test);
-                    case "pry2":
-                        return Ok(entities.Students.Where(e => e.Class.ToLower() == schoolClass.ToLower() && e.Gender.ToLower() == gender.ToLower()).ToList());
-                    case "pry3":
-                        return Ok(entities.Students.Where(e => e.Class.ToLower() == schoolClass.ToLower() && e.Gender.ToLower() == gender.ToLower()).ToList());
-                    case "pry4":
-                        return Ok(entities.Students.Where(e => e.Class.ToLower() == schoolClass.ToLower() && e.Gender.ToLower() == gender.ToLower()).ToList());
-                    case "pry5":
-                        return Ok(entities.Students.Where(e => e.Class.ToLower() == schoolClass.ToLower() && e.Gender.ToLower() == gender.ToLower()).ToList());
                     case "jss1":
                         return Ok(entities.Students.Where(e => e.Class.ToLower() == schoolClass.ToLower() && e.Gender.ToLower() == gender.ToLower()).ToList());
                     case "jss2":

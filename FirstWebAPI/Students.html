@@ -7,12 +7,17 @@
     <script type="text/javascript">
         $(document).ready(function () {
             var ulStudent = $('#ulStudent');
-
             $('#btn').click(function () {
+                var username = $('#txtUsername').val();
+                var password = $('#txtPassword').val();
+
                 $.ajax({
                     type: 'GET',
                     url: 'api/Students',
                     dataType: 'json',
+                    headers :{
+                        'Authorization' : 'Basic ' + btoa(username + ':' + password)
+                    },
                     success: function (data) {
                         ulStudent.empty();
                         $.each(data, function (index, val) {
@@ -20,8 +25,14 @@
                             //console.log(JSON.stringify(val));
 
                             var fullName = val.firstName + ' ' + val.lastName;
-                            ulStudent.append('<li>' + fullName + '</li>')
+                            ulStudent.append('<li>' + fullName + ' (' + val.Gender + ')</li>')
                         });
+                    },
+                    complete: function (jqXHR) {
+                        if (jqXHR.status == '401') {
+                            ulStudent.empty();
+                            ulStudent.append('<li style="color:red">' + jqXHR.status + ' : ' + jqXHR.statusText + '</li>');
+                        }
                     }
                 });
             });
@@ -33,8 +44,13 @@
     </script>
 </head>
 <body>
-    <input id="btn" type="button" value="Get name of Students" />
-    <input id="btnClear" type="button" value="Clear" />
-    <ul id="ulStudent"></ul>
+    <div>
+        Username : <input type="text" id="txtUsername" />
+        Password : <input type="password" id="txtPassword" />
+        <br /><br />
+        <input id="btn" type="button" value="Authenticate and Get names of Students" />
+        <input id="btnClear" type="button" value="Clear" />
+        <ul id="ulStudent"></ul>
+    </div>
 </body>
 </html>
