@@ -25,7 +25,8 @@
                             //console.log(JSON.stringify(val));
 
                             var fullName = val.firstName + ' ' + val.lastName;
-                            ulStudent.append('<li>' + fullName + ' (' + val.Gender + ')</li>')
+                            var Gender = ' (' + val.gender + ')';
+                            ulStudent.append('<li>' + fullName + Gender + '</li>')
                         });
                     },
                     complete: function (jqXHR) {
@@ -48,7 +49,7 @@
         Username : <input type="text" id="txtUsername" />
         Password : <input type="password" id="txtPassword" />
         <br /><br />
-        <input id="btn" type="button" value="Authenticate and Get names of Students" />
+        <input id="btn" type="button" value="Authenticate and Get names of Student" />
         <input id="btnClear" type="button" value="Clear" />
         <ul id="ulStudent"></ul>
     </div>

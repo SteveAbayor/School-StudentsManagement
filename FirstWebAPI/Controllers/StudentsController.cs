@@ -13,7 +13,7 @@ namespace FirstWebAPI.Controllers
     public class StudentsController : ApiController
     {
         [BasicAuthentication]
-        public IHttpActionResult Get(string schoolClass, string gender = "All")
+        public IHttpActionResult Get(string schoolClass = "All", string gender = "All")
         {
             string username = Thread.CurrentPrincipal.Identity.Name;
 
